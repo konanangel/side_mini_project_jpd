@@ -1,0 +1,1 @@
+# side_mini_project_jpd
