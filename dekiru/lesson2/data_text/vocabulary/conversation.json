@@ -1,0 +1,18 @@
+{
+    "0": {"hiragana": "これ", "kanji": "", "romanji": "kore", "meaning": "Cái này"},
+    "1": {"hiragana": "それ", "kanji": "", "romanji": "sore", "meaning": "Cái kia"},
+    "2": {"hiragana": "あれ", "kanji": "", "romanji": "are", "meaning": "Cái ấy"},
+    "3": {"hiragana": "どれ", "kanji": "", "romanji": "dore", "meaning": "Cái nào"},
+    "4": {"hiragana": "この～", "kanji": "", "romanji": "kono~", "meaning": "Cái ～ này"},
+    "5": {"hiragana": "その～", "kanji": "", "romanji": "sono~", "meaning": "Cái ～ kia"},
+    "6": {"hiragana": "あの～", "kanji": "", "romanji": "ano~", "meaning": "Cái ～ ấy"},
+    "7": {"hiragana": "どの～", "kanji": "", "romanji": "dono~", "meaning": "Cái ～ nào"},
+    "8": {"hiragana": "だれ", "kanji": "", "romanji": "dare", "meaning": "Ai"},
+    "9": {"hiragana": "ちゅうもんをおねがいします", "kanji": "注文をお願いします", "romanji": "chuumon o onegai shimasu", "meaning": "Cho tôi gọi món"},
+    "10": {"hiragana": "いくら", "kanji": "", "romanji": "ikura", "meaning": "Bao nhiêu (hỏi giá)"},
+    "11": {"hiragana": "すみません", "kanji": "", "romanji": "sumimasen", "meaning": "Xin lỗi/Cho tôi hỏi nhờ"},
+    "12": {"hiragana": "ください", "kanji": "", "romanji": "kudasai", "meaning": "Hãy cho tôi ～"},
+    "13": {"hiragana": "じゃ／じゃあ", "kanji": "", "romanji": "ja/jaa", "meaning": "Thế thì/vậy thì"},
+    "14": {"hiragana": "では", "kanji": "", "romanji": "dewa", "meaning": "Thế thì/vậy thì (trang trọng)"}
+  }
+  

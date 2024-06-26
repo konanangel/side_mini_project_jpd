@@ -1,0 +1,17 @@
+{
+    "0": {"hiragana": "ここ／こちら", "kanji": "", "romanji": "koko/kocchira", "meaning": "Đây chỗ này / Phía này"},
+    "1": {"hiragana": "そこ／そちら", "kanji": "", "romanji": "soko/sochira", "meaning": "Kia chỗ kia / Phía kia"},
+    "2": {"hiragana": "あそこ／あちら", "kanji": "", "romanji": "asoko/achira", "meaning": "Đó chỗ đó / Phía đó"},
+    "3": {"hiragana": "インフォメーション", "kanji": "", "romanji": "infomēshon", "meaning": "Quầy thông tin"},
+    "4": {"hiragana": "ATM", "kanji": "", "romanji": "ATM", "meaning": "Máy rút tiền tự động"},
+    "5": {"hiragana": "エスカレーター", "kanji": "", "romanji": "esukarētā", "meaning": "Thang cuốn"},
+    "6": {"hiragana": "エレベーター", "kanji": "", "romanji": "erebētā", "meaning": "Thang máy"},
+    "7": {"hiragana": "きつえんしょ", "kanji": "喫煙所", "romanji": "kitsuensho", "meaning": "Nơi hút thuốc"},
+    "8": {"hiragana": "トイレ", "kanji": "", "romanji": "toire", "meaning": "Nhà vệ sinh"},
+    "9": {"hiragana": "レジ", "kanji": "", "romanji": "reji", "meaning": "Quầy thu ngân"},
+    "10": {"hiragana": "きっさてん", "kanji": "喫茶店", "romanji": "kissaten", "meaning": "Quán giải khát"},
+    "11": {"hiragana": "１００円ショップ", "kanji": "100円ショップ", "romanji": "hyakuen shoppu", "meaning": "Cửa hàng 100 Yên"},
+    "12": {"hiragana": "レストラン", "kanji": "", "romanji": "resutoran", "meaning": "Nhà hàng quán ăn"},
+    "13": {"hiragana": "ちか", "kanji": "地下", "romanji": "chika", "meaning": "Ngầm dưới lòng đất"}
+  }
+  

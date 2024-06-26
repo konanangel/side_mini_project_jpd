@@ -1,0 +1,9 @@
+thead{
+    position: sticky;
+    top: 0;
+    background-color: red;
+    
+}
+thead .title{
+    margin: 1rem 0;
+}
