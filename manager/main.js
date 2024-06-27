@@ -94,10 +94,7 @@ function create_and_handle_vocabulary(vocabulary_file_name) {
 
 
 
-function vocabulary_action() {
-    init_vocabulary();
-    document.querySelector("#title button.vocabulary").removeEventListener('click', vocabulary_action);
-}
+
 
 async function init_vocabulary() {
     document.getElementById('loading').style.display = 'block';
@@ -132,15 +129,63 @@ async function init_vocabulary() {
 }
 
 
-
-//document.querySelector("#title button.vocabulary").addEventListener('click', vocabulary_action);
 function init_grammar() {
+    try {
+        let conversation = document.getElementById('conversation');
+        let location = document.getElementById('location');
+        let food = document.getElementById('food');
+        let object = document.getElementById('object');
+        conversation.remove();
+        location.remove();
+        food.remove();
+        object.remove();
+    } catch (error) {
+
+    }
+
     grammar_render.init_grammar();
-    
-    
+    document.querySelector("#title button.vocabulary").addEventListener('click', vocabulary_action);
+    document.querySelector("#title button.grammar").removeEventListener('click', init_grammar);
 }
 
-init_grammar();
+function vocabulary_action() {
+    try {
+        let chi_vi_tri = document.querySelector('.chi_vi_tri');
+        chi_vi_tri.remove();
+        let cho_toi_thu_gi = document.querySelector('.cho_toi_thu_gi');
+        cho_toi_thu_gi.remove();
+        let dem_so_cai = document.querySelector('.dem_so_cai');
+        dem_so_cai.remove();
+        let hoi_chu_nhan = document.querySelector('.hoi_chu_nhan');
+        hoi_chu_nhan.remove();
+        let hoi_dia_diem = document.querySelector('.hoi_dia_diem');
+        hoi_dia_diem.remove();
+        let hoi_gia_tien = document.querySelector('.hoi_gia_tien');
+        hoi_gia_tien.remove();
+        let hoi_nguyen_lieu = document.querySelector('.hoi_nguyen_lieu');
+        hoi_nguyen_lieu.remove();
+        let hoi_so_tang = document.querySelector('.hoi_so_tang');
+        hoi_so_tang.remove();
+        let hoi_tu_trong_ngon_ngu = document.querySelector('.hoi_tu_trong_ngon_ngu');
+        hoi_tu_trong_ngon_ngu.remove();
+        let hoi_xuat_xu = document.querySelector('.hoi_xuat_xu');
+        hoi_xuat_xu.remove();
+    } catch (error) {
+
+    }
+
+    init_vocabulary();
+    document.querySelector("#title button.vocabulary").removeEventListener('click', vocabulary_action);
+    document.querySelector("#title button.grammar").addEventListener('click', init_grammar);
+
+}
+
+
+document.querySelector("#title button.vocabulary").addEventListener('click', vocabulary_action);
+document.querySelector("#title button.grammar").addEventListener('click', init_grammar);
+
+
+
 
 
 
