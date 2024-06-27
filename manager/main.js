@@ -1,4 +1,6 @@
 import functions from './functions.js'
+import grammar_render from './grammar_handler/grammar_render.js';
+
 const baseUrl = '/dekiru/lesson2/data_text/vocabulary/';
 const files = ['conversation.json', 'food.json', 'location.json', 'object.json'];
 const title = document.getElementById("title");
@@ -14,18 +16,22 @@ document.getElementById('loading').style.display = 'block';
 
 files.forEach(file => {
     fetch(baseUrl + file)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Không thể tải tập tin JSON');
-        }
-    })
-    .catch(error => {
-        console.error(error);
-    })
-    .finally(() => {
-        // Khi đã xử lý xong fetch, ẩn đi ảnh loading
-        document.getElementById('loading').style.display = 'none';
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Không thể tải tập tin JSON');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            // Khi đã xử lý xong fetch, ẩn đi ảnh loading
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector("#title").style.display = "block";
+            }, 800)
+
+        });
 });
 
 
@@ -52,58 +58,31 @@ function create_and_handle_vocabulary(vocabulary_file_name) {
     document.querySelector("style").innerHTML +=
         `#${vocabulary_file_name.replace(".json", "")}{
         position: absolute;
-        width: 30vw;
-        height: 50vh;
-        overflow: auto;
-        border: 0.5rem solid black;
+        width: 35rem;
+        height: 30vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border: 0.4rem solid black;
         border-radius: 1rem;
         background-color: rgb(203, 208, 247);
         text-align: center;
+        font-size: 0.75rem;
     }`
     document.body.appendChild(table);
     init_table_content(baseUrl, vocabulary_file_name, document.getElementById(vocabulary_file_name.replace(".json", "")));
 
     //svg
-    const svg = createSVG();
-    drawLine(svg, document.getElementById("title"), table);
+    var svg = functions.createSVG();
+    functions.drawLine(svg, document.getElementById("title"), table);
     window.addEventListener('mousemove', () => {
         svg.innerHTML = '';
-        drawLine(svg, document.getElementById("title"), table);
+        functions.drawLine(svg, document.getElementById("title"), table);
     });
 
 }
 
 
 //=========================================================================\\
-
-//vẽ đường nối
-//=========================================================================\\
-
-function createSVG() {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "svgContainer");
-    document.body.appendChild(svg);
-    return svg;
-}
-
-function drawLine(svg, div1, div2) {
-    const rect1 = div1.getBoundingClientRect();
-    const rect2 = div2.getBoundingClientRect();
-
-    const x1 = rect1.left + rect1.width / 2;
-    const y1 = rect1.bottom;
-    const x2 = rect2.left + rect2.width / 2;
-    const y2 = rect2.top;
-
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", x1);
-    line.setAttribute("y1", y1);
-    line.setAttribute("x2", x2);
-    line.setAttribute("y2", y2);
-    line.setAttribute("stroke", "black");
-    svg.appendChild(line);
-}
-
 
 
 //=========================================================================\\
@@ -113,15 +92,55 @@ function drawLine(svg, div1, div2) {
 //=========================================================================\\
 
 
-files.forEach((file, index) => {
-    setTimeout(() => {
-        create_and_handle_vocabulary(file, index + 1);
-    }, index * 100); // 100ms cho mỗi lần gọi, dựa vào index để tăng thời gian chờ
-});
+
+
+function vocabulary_action() {
+    init_vocabulary();
+    document.querySelector("#title button.vocabulary").removeEventListener('click', vocabulary_action);
+}
+
+async function init_vocabulary() {
+    document.getElementById('loading').style.display = 'block';
+    for (let index = 0; index < files.length; index++) {
+        await new Promise(resolve => setTimeout(() => {
+            create_and_handle_vocabulary(files[index], index + 1);
+            resolve();
+        }, index * 100));
+    }
+    document.getElementById('loading').style.display = 'none';
+
+    // custom cho lesson 2
+    // conversation, location, object, food
+    let conversation = document.getElementById('conversation');
+    let location = document.getElementById('location');
+    let food = document.getElementById('food');
+    let object = document.getElementById('object');
+
+    if (conversation && location && food && object) {
+        conversation.style.top = '30%';
+        conversation.style.left = 0;
+
+        location.style.top = '30%';
+        location.style.right = 0;
+
+        food.style.bottom = 0;
+        food.style.left = 0;
+
+        object.style.bottom = 0;
+        object.style.right = 0;
+    }
+}
 
 
 
+//document.querySelector("#title button.vocabulary").addEventListener('click', vocabulary_action);
+function init_grammar() {
+    grammar_render.init_grammar();
+    
+    
+}
 
+init_grammar();
 
 
 

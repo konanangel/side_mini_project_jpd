@@ -1,7 +1,39 @@
 import table from './table.js';
 
 
+
 export default new class functions {
+
+    //vẽ đường nối
+    //=========================================================================\\
+
+    createSVG() {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("class", "svgContainer");
+        document.body.appendChild(svg);
+        return svg;
+    }
+
+    drawLine(svg, div1, div2) {
+        const rect1 = div1.getBoundingClientRect();
+        const rect2 = div2.getBoundingClientRect();
+
+        const x1 = rect1.left + rect1.width / 2;
+        const y1 = rect1.bottom;
+        const x2 = rect2.left + rect2.width / 2;
+        const y2 = rect2.top;
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", x1);
+        line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2);
+        line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "black");
+        svg.appendChild(line);
+    }
+
+
+
     init_draggable(div) {
 
         // Biến để lưu trạng thái kéo
@@ -41,7 +73,7 @@ export default new class functions {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.text(); 
+                return response.text();
             })
             .then(data => {
                 console.log(data)
