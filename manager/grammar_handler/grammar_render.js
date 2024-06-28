@@ -14,32 +14,41 @@ const html_grammar_files = [
 ];
 
 const based_link = "/models/grammar/lesson2/";
-const grammar_buttons = document.querySelector("button.grammar");
 
 function init_grammar_table() {
     html_grammar_files.forEach(file => {
         create_grammar_table(file);
     });
 
-    let intervalId = setInterval(() => {
-        var grammar_table = document.querySelectorAll(".grammar-table");
-        grammar_table.forEach(g => {
-            functions.init_draggable(g);
-        });
 
-        var grammar_button = document.querySelectorAll('.grammar-button button');
-        grammar_button.forEach(gm => {
-            var svg = functions.createSVG();
-            functions.drawLine(svg, document.getElementById('title'), gm);
-
-            window.addEventListener('mousemove', () => {
-                svg.innerHTML = '';
-                functions.drawLine(svg, document.getElementById("title"), gm);
+    const intervalId = setInterval(() => {
+        const element = document.querySelector('.grammar-table');
+        console.log("grammar table is not ready");
+        if (element) {
+            console.log("grammar table is ready");
+            var grammar_table = document.querySelectorAll(".grammar-table");
+            grammar_table.forEach(g => {
+                functions.init_draggable(g);
             });
-        });
 
-        clearInterval(intervalId);
-    }, 100);
+            var grammar_button = document.querySelectorAll('.grammar-button button');
+            grammar_button.forEach(gm => {
+                var svg = functions.createSVG();
+                functions.drawLine(svg, document.getElementById('title'), gm);
+
+                window.addEventListener('mousemove', () => {
+                    svg.innerHTML = '';
+                    functions.drawLine(svg, document.getElementById("title"), gm);
+                });
+            });
+
+            clearInterval(intervalId);  // Dừng việc kiểm tra khi tìm thấy phần tử
+        }
+        
+    }, 1000);  // Kiểm tra mỗi giây (1000ms)
+
+
+
 }
 
 
@@ -48,15 +57,6 @@ function create_grammar_table(file_name) {
     //fetch data
     var background_html;
     fetch("/models/grammar/grammar_table.html")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(data => {
-        background_html = data;
-        fetch(based_link + file_name)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -64,21 +64,30 @@ function create_grammar_table(file_name) {
             return response.text();
         })
         .then(data => {
-            var grammar_table = document.createElement('div');
-            grammar_table.innerHTML = `${background_html}`;
-            grammar_table.className = "grammar-table";
-            grammar_table.querySelector(".grammar-button button").innerHTML = file_name.replace(".html", "");
-            grammar_table.querySelector(".grammar-button button").addEventListener('click', ()=>{
-                togglePopup(file_name.replace(".html", ""));
-            })
-            grammar_table.querySelector(".grammar-button .popup-content").innerHTML = data;
-            grammar_table.querySelector(".grammar-button .popup-content").className += (" " + file_name.replace(".html", ""));
-            document.body.appendChild(grammar_table);
+            background_html = data;
+            fetch(based_link + file_name)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    var grammar_table = document.createElement('div');
+                    grammar_table.innerHTML = `${background_html}`;
+                    grammar_table.className = "grammar-table";
+                    grammar_table.querySelector(".grammar-button button").innerHTML = file_name.replace(".html", "");
+                    grammar_table.querySelector(".grammar-button button").addEventListener('click', () => {
+                        togglePopup(file_name.replace(".html", ""));
+                    })
+                    grammar_table.querySelector(".grammar-button .popup-content").innerHTML = data;
+                    grammar_table.querySelector(".grammar-button .popup-content").className += (" " + file_name.replace(".html", ""));
+                    document.body.appendChild(grammar_table);
+                })
+                .catch(error => console.error('Error:', error));
         })
         .catch(error => console.error('Error:', error));
-    })
-    .catch(error => console.error('Error:', error));
-    
+
 }
 
 export default new class grammar_render {
