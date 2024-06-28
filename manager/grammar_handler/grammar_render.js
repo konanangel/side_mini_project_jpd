@@ -19,24 +19,29 @@ const grammar_buttons = document.querySelector("button.grammar");
 function init_grammar_table() {
     html_grammar_files.forEach(file => {
         create_grammar_table(file);
-    })
-    setTimeout(()=>{
+    });
+
+    let intervalId = setInterval(() => {
         var grammar_table = document.querySelectorAll(".grammar-table");
         grammar_table.forEach(g => {
             functions.init_draggable(g);
-        })
+        });
+
         var grammar_button = document.querySelectorAll('.grammar-button button');
         grammar_button.forEach(gm => {
             var svg = functions.createSVG();
-            functions.drawLine(svg, document.getElementById('title'), gm); 
+            functions.drawLine(svg, document.getElementById('title'), gm);
+
             window.addEventListener('mousemove', () => {
                 svg.innerHTML = '';
                 functions.drawLine(svg, document.getElementById("title"), gm);
             });
-        })
-    }, 100)
-    
+        });
+
+        clearInterval(intervalId);
+    }, 100);
 }
+
 
 
 function create_grammar_table(file_name) {
@@ -79,6 +84,6 @@ function create_grammar_table(file_name) {
 export default new class grammar_render {
 
     init_grammar() {
-        grammar_buttons.addEventListener('click', init_grammar_table);
+        init_grammar_table();
     }
 }
